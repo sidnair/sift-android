@@ -42,7 +42,7 @@ public class HelloSift extends AppCompatActivity {
         buttonOther.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToOtherActivity();
+                setUserId();
             }
         });
     }
@@ -65,8 +65,7 @@ public class HelloSift extends AppCompatActivity {
         Sift.close();
     }
 
-    public void goToOtherActivity() {
-        Intent intent = new Intent(this, OtherActivity.class);
-        startActivity(intent);
+    public void setUserId() {
+        Sift.setUserId("USER_ID");
     }
 }

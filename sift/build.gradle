@@ -90,24 +90,24 @@ jsonSchema2Pojo {
     source = files('src/main/json')
 }
 
-task compileAndroid(dependsOn: 'generateJsonSchema2PojoForRelease') << {
-    if (System.getenv("CI") == null) {
-        def JAVA_DIR = '../code/java/sift-json/src/main/json/'
-        def androidDir = new File('sift/src/main/json')
-        def diffFiles = []
+task compileAndroid(/*dependsOn: 'generateJsonSchema2PojoForRelease'*/) << {
+    // if (System.getenv("CI") == null) {
+        // def JAVA_DIR = '../code/java/sift-json/src/main/json/'
+        // def androidDir = new File('sift/src/main/json')
+        // def diffFiles = []
 
-        androidDir.eachFile {
-            def cmd = "diff ${it.getAbsolutePath()} ${JAVA_DIR}${it.getName()}"
-            int status = cmd.execute().waitFor()
-            if (status != 0) {
-                diffFiles << it.getName()
-            }
-        }
+        // androidDir.eachFile {
+            // def cmd = "diff ${it.getAbsolutePath()} ${JAVA_DIR}${it.getName()}"
+            // int status = cmd.execute().waitFor()
+            // if (status != 0) {
+                // diffFiles << it.getName()
+            // }
+        // }
 
-        if (diffFiles.size() != 0) {
-            throw new GradleException("The following files are not in sync:\n${diffFiles.join('\n')}")
-        }
-    }
+        // if (diffFiles.size() != 0) {
+            // throw new GradleException("The following files are not in sync:\n${diffFiles.join('\n')}")
+        // }
+    // }
 }
 
 tasks.preBuild.dependsOn(compileAndroid);
